@@ -1,14 +1,16 @@
-kitty
-waybar
-Hyprland
-wofi
-starship
-bluez
-bluez-utils
-blueman
-firefox
-qutebrowser
-vim
-grim
-slurp
-swappy
+kitty, pacman
+waybar, pacman
+Hyprland, pacman
+wofi, pacman
+starship, pacman
+bluez, pacman
+bluez-utils, pacman
+blueman, pacman
+firefox, pacman
+qutebrowser, pacman
+vim, pacman
+grim, pacman
+slurp, pacman
+swappy, pacman
+gh, homebrew
+docker, pacman
