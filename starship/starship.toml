@@ -1,0 +1,92 @@
+# The format of the terminal
+# Format from
+# 	https://starship.rs/presets/pastel-powerline.html
+format = """
+$os\
+$username\
+[](bg:#DA627D fg:#9A348E)\
+$directory\
+[](fg:#DA627D bg:#FCA17D)\
+$git_branch\
+$git_status\
+[](fg:#FCA17D bg:#86BBD8)\
+$c\
+$elixir\
+$elm\
+$golang\
+$gradle\
+$haskell\
+$java\
+$julia\
+$nodejs\
+$nim\
+$rust\
+$scala\
+$time\
+[ ](fg:#33658A)\
+\n
+$character
+"""
+
+
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# Inserts a blank line between shell prompts
+add_newline = true
+
+# Replace the '❯' symbol in the prompt with '➜'
+[character] # The name of the module we are configuring is 'character'
+success_symbol = '[➜](bold green)' # The 'success_symbol' segment is being set to '➜' with the color 'bold green'
+error_symbol = '[➜](bold red)'
+# Disable the package module, hiding it from the prompt completely
+[package]
+disabled = false
+
+[username]
+show_always = true
+style_user = "bg:#9A348E"
+style_root = "bg:#BAD786"
+format = '[$user ]($style)'
+disabled = false
+
+# Battery Config
+[battery]
+format = '[$symbol$percentage]($style) '
+full_symbol = '🔋 '
+charging_symbol = '⚡️ '
+discharging_symbol = '💀 '
+empty_empty = '󰂎 '
+unkown_symbol = '󰂎 '
+
+[[battery.display]]
+threshold = 10
+style = 'bold red'
+
+# OS
+[os]
+format = "$symbol ($style)"
+style = "bold blue"
+disabled = false
+
+[os.symbols]
+Arch = "💀"
+
+# Directory
+[directory]
+style = "fg:#e3e5e5 bg:#769ff0"
+format = "[ $path ]($style)"
+truncation_length = 2
+#truncation_symbol = ".../"
+
+[directory.substitutions]
+"code" = "🤖 "
+"Downloads" = " "
+"tmp" = ""
+"img" = "  "
+
+[time]
+disabled = false
+time_format = "%R"
+style = "bg:#33678A"
+format = '[ $time ]($style)'
