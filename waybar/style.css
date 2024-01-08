@@ -42,11 +42,9 @@ tooltip {
     border-radius: 10px;
 }
 
-#workspaces button:hover {
-    background: #11111b;
-    color: #cdd6f4;
-    border-radius: 10px;
-	border: none;
+#workspace button:hover {
+	background: #0d1117;
+	color: #0d1117;
 }
 
 #custom-power_profile,

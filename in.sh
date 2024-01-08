@@ -35,11 +35,13 @@ FILE_NAME="list"
 is_root(){ [ "${EUID:-$(id -u)}" -eq 0 ] }
 
 if is_root; then
-	PACMAN_INSTALL="pacman -S"
+	PACMAN_INSTALL="pacman -S --noconfirm"
 	HOMEBREW_INSTALL="brew install"
+	YAY_INSTALL="yay -S --noconfirm"
 else
-	PACMAN_INSTALL="sudo pacman -S"
+	PACMAN_INSTALL="sudo pacman -S --noconfirm"
 	HOMEBREW_INSTALL="sudo brew install"
+	YAY_INSTALL="sudo yay -S --noconfirm"
 fi
 
 # Install the package managers (and update them)
@@ -54,11 +56,46 @@ fi
 
 # Install Homebrew
 # Check if the user wants to install homebrew
+HOMEIBIN=$(/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)")
+
 if $INTERACTIVE; then
 	read -rp "Install Homebrew?(yes/no)" ihome
 	if [[ $ihome =~ $yes_regex ]]; then
-		/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+		$HOMEIBIN
 	fi
+else
+	# If not interactive, install it
+	$HOMEIBIN
+fi
+
+function install_from_aur() {
+	BIN="$1"
+	git clone "https://aur.archlinux.org/$BIN" "/tmp/$BIN" || exit
+	cd "/tmp/$BIN"
+	if $INTERACTIVE; then
+		makepkg -simrC
+	else
+		makepkg -simrC --noconfirm
+	fi
+	cd - || exit
+}
+
+# Install Yay
+# Check if yay is there
+ISYAY=false
+
+if command -v "yay"; then
+	ISYAY=true
+fi
+
+# If not installed, ask the user to do so
+if $INTERACTIVE; then
+	read -rp "Install yay?(yes/no)" iyay
+	if [[ $iyay =~ $yes_regex ]]; then
+		install_from_aur "yay-bin"
+	fi
+else
+	install_from_aur "yay-bin"
 fi
 
 # Check the file that contains the list of programs to be installed
@@ -68,10 +105,10 @@ while IFS=, read -r package pkm; do
 	# Map the pkm to the appropriate install command
 	if [[ $pkm == "homebrew" ]]; then
 		INSTALL_PKM=$HOMEBREW_INSTALL
-	else 
-		if [[ $pkm == "pacman" ]]; then
+	elif  [[ $pkm == "pacman" ]]; then
 			INSTALL_PKM=$PACMAN_INSTALL
-		fi
+	elif [[ $pkm == "yay" ]]; then
+			INSTALL_PKM=$YAY_INSTALL
 	# Incase there is no package manager specified,
 	# 	use pacman
 	else
