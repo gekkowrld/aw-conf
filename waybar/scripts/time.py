@@ -4,6 +4,7 @@ from datetime import datetime
 
 
 def print_current_time():
+    """ """
     try:
         while True:
             current_time = datetime.now().strftime("%H:%M:%S:%f")[:-3]
