@@ -30,18 +30,17 @@
             "10": []
         }
     },
-    
+
     "tray": {
         "icon-size": 18,
         "spacing": 10
     },
 
     "clock": {
-        "format": "{: %R   %a, %b %e}",
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
-    },
-
-    "backlight": {
+		"interval": 60, //I can't figure out how to do this
+		"format": "{: %T   %a, %b %e}" // Seconds don't change
+	},
+   "backlight": {
         "device": "intel_backlight",
         "format": "{icon} {percent}%",
         "format-icons": ["󰃞", "󰃟", "󰃠"],
@@ -91,7 +90,7 @@
         "on-scroll-down": "pamixer --default-source -d 5",
         "scroll-step": 5
     },
-    
+
     "temperature": {
         "thermal-zone": 1,
         "format": "{temperatureF}°F ",

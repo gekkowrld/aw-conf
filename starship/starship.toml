@@ -4,12 +4,9 @@
 format = """
 $os\
 $username\
-[](bg:#DA627D fg:#9A348E)\
 $directory\
-[](fg:#DA627D bg:#FCA17D)\
 $git_branch\
 $git_status\
-[](fg:#FCA17D bg:#86BBD8)\
 $c\
 $elixir\
 $elm\
@@ -23,8 +20,9 @@ $nim\
 $rust\
 $scala\
 $time\
-[ ](fg:#33658A)\
-\n
+$cmd_duration\
+\n\
+$battery\
 $character
 """
 
@@ -45,27 +43,31 @@ disabled = false
 
 [username]
 show_always = true
-style_user = "bg:#9A348E"
-style_root = "bg:#BAD786"
-format = '[$user ]($style)'
+style_user = "fg:#9A348E"
+style_root = "fg:#BAD786"
+format = '\[[$user]($style)\]'
 disabled = false
+
+[cmd_duration]
+min_time = 0
+format = '@[$duration](bold yellow)'
 
 # Battery Config
 [battery]
-format = '[$symbol$percentage]($style) '
+format = '\[[$symbol$percentage]($style) \]'
 full_symbol = '🔋 '
 charging_symbol = '⚡️ '
 discharging_symbol = '💀 '
-empty_empty = '󰂎 '
-unkown_symbol = '󰂎 '
+empty_symbol = '󰂎 '
+unknown_symbol = '󰂎 '
 
 [[battery.display]]
-threshold = 10
+threshold = 100
 style = 'bold red'
 
 # OS
 [os]
-format = "$symbol ($style)"
+format = '\[[$symbol]($style)\]'
 style = "bold blue"
 disabled = false
 
@@ -74,8 +76,8 @@ Arch = "💀"
 
 # Directory
 [directory]
-style = "fg:#e3e5e5 bg:#769ff0"
-format = "[ $path ]($style)"
+style = "fg:#e3e5e5 fg:#769ff0"
+format = '\[[$path]($style)\]'
 truncation_length = 2
 #truncation_symbol = ".../"
 
@@ -88,5 +90,5 @@ truncation_length = 2
 [time]
 disabled = false
 time_format = "%R"
-style = "bg:#33678A"
+style = "fg:#33678A"
 format = '[ $time ]($style)'

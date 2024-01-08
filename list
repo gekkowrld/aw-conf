@@ -14,3 +14,10 @@ slurp, pacman
 swappy, pacman
 gh, homebrew
 docker, pacman
+ttf-jetbrains-mono-nerd, yay
+noto-fonts-emoji, yay
+pamixer, yay
+brightnessctl, yay
+lxappearance, yay
+dracula-icons-git, yay
+dracula-gtk-theme, yay
