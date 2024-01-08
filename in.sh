@@ -19,7 +19,7 @@ fi
 
 # The regex to test if the user accepted (yes) or declined (no)
 yes_regex="^([yY][eE][sS]|[yY])$" # Yes
-no_regex="^([nN][oO]|[nN])$"       # No
+no_regex="^([nN][oO]|[nN])$"      # No
 
 # Install the "global" packages in the list file
 
@@ -32,7 +32,9 @@ FILE_NAME="list"
 # The test can also be "faked" by fakeroot, so let the user run the script
 # If the user is not root, append 'sudo' to the commands that require it.
 
-is_root(){ [ "${EUID:-$(id -u)}" -eq 0 ] }
+is_root() {
+	[ "${EUID:-$(id -u)}" -eq 0 ]
+}
 
 if is_root; then
 	PACMAN_INSTALL="pacman -S --noconfirm"
@@ -105,10 +107,10 @@ while IFS=, read -r package pkm; do
 	# Map the pkm to the appropriate install command
 	if [[ $pkm == "homebrew" ]]; then
 		INSTALL_PKM=$HOMEBREW_INSTALL
-	elif  [[ $pkm == "pacman" ]]; then
-			INSTALL_PKM=$PACMAN_INSTALL
+	elif [[ $pkm == "pacman" ]]; then
+		INSTALL_PKM=$PACMAN_INSTALL
 	elif [[ $pkm == "yay" ]]; then
-			INSTALL_PKM=$YAY_INSTALL
+		INSTALL_PKM=$YAY_INSTALL
 	# Incase there is no package manager specified,
 	# 	use pacman
 	else
@@ -117,7 +119,7 @@ while IFS=, read -r package pkm; do
 	echo "Installing $package..."
 	echo "$INSTALL_PKM $package"
 	$INSTALL_PKM $package
-done < $FILE_NAME
+done <$FILE_NAME
 
 # Check the folders in in the current directory
 
@@ -128,4 +130,3 @@ IFS="/ "
 for DIR in $DIRECTORIES_P; do
 	# Run the scripts of each folder
 done
-
