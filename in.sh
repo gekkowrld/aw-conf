@@ -60,21 +60,21 @@ fi
 # Check if the user wants to install homebrew
 HOMEIBIN=$(/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)")
 
-if $INTERACTIVE; then
+if "$INTERACTIVE"; then
 	read -rp "Install Homebrew?(yes/no)" ihome
 	if [[ $ihome =~ $yes_regex ]]; then
-		$HOMEIBIN
+		"$HOMEIBIN"
 	fi
 else
 	# If not interactive, install it
-	$HOMEIBIN
+	"$HOMEIBIN"
 fi
 
 function install_from_aur() {
 	BIN="$1"
 	git clone "https://aur.archlinux.org/$BIN" "/tmp/$BIN" || exit
 	cd "/tmp/$BIN"
-	if $INTERACTIVE; then
+	if "$INTERACTIVE"; then
 		makepkg -simrC
 	else
 		makepkg -simrC --noconfirm
@@ -91,7 +91,7 @@ if command -v "yay"; then
 fi
 
 # If not installed, ask the user to do so
-if $INTERACTIVE; then
+if "$INTERACTIVE"; then
 	read -rp "Install yay?(yes/no)" iyay
 	if [[ $iyay =~ $yes_regex ]]; then
 		install_from_aur "yay-bin"
@@ -118,8 +118,8 @@ while IFS=, read -r package pkm; do
 	fi
 	echo "Installing $package..."
 	echo "$INSTALL_PKM $package"
-	$INSTALL_PKM $package
-done <$FILE_NAME
+	"$INSTALL_PKM" "$package"
+done <"$FILE_NAME"
 
 # Check the folders in in the current directory
 
@@ -127,6 +127,6 @@ DIRECTORIES_P=$(ls -d */)
 
 IFS="/ "
 
-for DIR in $DIRECTORIES_P; do
+for DIR in "$DIRECTORIES_P"; do
 	# Run the scripts of each folder
 done
