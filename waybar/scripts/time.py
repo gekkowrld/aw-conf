@@ -1,6 +1,6 @@
 import json
-from datetime import datetime
 import time
+from datetime import datetime
 
 
 def print_current_time():
