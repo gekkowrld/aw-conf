@@ -30,7 +30,7 @@
             "10": []
         }
     },
-
+    
     "tray": {
         "icon-size": 18,
         "spacing": 10
@@ -90,7 +90,7 @@
         "on-scroll-down": "pamixer --default-source -d 5",
         "scroll-step": 5
     },
-
+    
     "temperature": {
         "thermal-zone": 1,
         "format": "{temperatureF}°F ",

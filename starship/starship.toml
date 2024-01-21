@@ -18,6 +18,10 @@ $julia\
 $nodejs\
 $nim\
 $rust\
+$css\
+$html\
+$javascript\
+$python\
 $scala\
 $time\
 $cmd_duration\
@@ -78,7 +82,7 @@ Arch = "💀"
 [directory]
 style = "fg:#e3e5e5 fg:#769ff0"
 format = '\[[$path]($style)\]'
-truncation_length = 2
+truncation_length = 1
 #truncation_symbol = ".../"
 
 [directory.substitutions]

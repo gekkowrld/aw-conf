@@ -21,3 +21,4 @@ brightnessctl, yay
 lxappearance, yay
 dracula-icons-git, yay
 dracula-gtk-theme, yay
+qemu-base, pacman
