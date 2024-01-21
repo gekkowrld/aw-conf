@@ -1,0 +1,44 @@
+#!/bin/bash
+
+author="Gekko Wrld"
+command="$1"
+default_license="GNU GPL"
+
+if [ "$#" -gt 2 ]; then
+	second_option="$2"
+	third_option="$3"
+elif [ "$#" -gt 1 ]; then
+	second_option="$2"
+fi
+
+function init_cobra() {
+	cobra-cli init --license "$1" --author "$author"
+}
+
+function command_cobra() {
+	cobra-cli add "$1" --license "$2" --author "$author"
+}
+
+case $command in
+"init" | "-i" | "i")
+	if [ "$second_option" ]; then
+		init_cobra "$second_option"
+	else
+		init_cobra "$default_license"
+	fi
+	;;
+
+"add" | "-a")
+	if [ "$third_option" ]; then
+		command_cobra "$second_option" "$third_option"
+	elif [ "$second_option" ]; then
+		command_cobra "$second_option" "$default_license"
+	else
+		echo "$# options passed, atleast 2 are required"
+	fi
+	;;
+
+*)
+	init_cobra "$default_license"
+	;;
+esac
