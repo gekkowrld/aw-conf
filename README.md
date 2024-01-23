@@ -3,6 +3,7 @@
 Each config is to be found in their own folders
 Each configs installs their own requirements so there is no "global" install
 
+:warning: The install script doesn't work, not pretend to!
 
 Special shoutout:
 
